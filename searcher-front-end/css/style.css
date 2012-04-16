@@ -1,0 +1,8 @@
+.body {
+}
+
+#header, #content, #footer {
+  margin: auto;
+  padding: auto;
+  width: 960px;
+}
