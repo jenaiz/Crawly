@@ -1,4 +1,0 @@
-queue:
-- name: url-crawler-queue
-  rate: 45/s
-  bucket_size: 40
