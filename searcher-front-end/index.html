@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>Seacher</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.5.0/build/cssreset/cssreset-min.css">
+    <link href="css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="css/jquery-1.7.2.js"></script>
+    <script type="text/javascript">
+          $.ajax({url: '/root.add_worker',
+           type: 'POST',
+           contentType: 'application/json',
+           data: '{ my_name: Bob }',
+           dataType: 'json',
+           success: function(response) {
+             alert(response.text);
+           }
+        });
+    </script>
+  </head>
+  
+  <body>
+    <div id="header"><a href="index.html">Searcher</a></div>
+    <div id="content">
+      <div id="content_header">
+        <form method="post" action="/search" class="well form-search">
+          <input type="text" class="input-medium search-query" size="50px" name="q" id="q">
+          <button type="submit" class="btn">Search</button>
+        </form>
+      </div>
+    </div>
+    <div id="footer">&copy; 2012</div>
+  </body>
+</html>
