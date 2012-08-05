@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}List{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+      <div id="content_help">
+        Searches related to... <a href="">{{ query }}</a>
+      </div>
+      <div id="content_links">
+        {% for link in links %}
+          <div id="link">
+            <h3><a href="{{ link.url }}" target="_blank">{{ link.title }}</a></h3>
+            <p>{{ link.text }}</p>
+            <a href="{{link}}">cached</a> - <a href="#">February 12th</a>
+          </div>        
+        {% endfor %}
+      </div>
+      <div id="content_home_right"><a href="#">Adsword: 360 x 250</a></div>
+{% endblock %}

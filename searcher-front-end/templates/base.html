@@ -1,8 +1,24 @@
-<html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Seacher</title>
+    {% block head %}
+    <title>{% block title %}{% endblock %} - Crawly</title>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.5.0/build/cssreset/cssreset-min.css">
     <link href="css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="css/jquery-1.7.2.js"></script>
+    <script type="text/javascript">
+          $.ajax({url: '/root.add_worker',
+           type: 'POST',
+           contentType: 'application/json',
+           data: '{ my_name: Bob }',
+           dataType: 'json',
+           success: function(response) {
+             alert(response.text);
+           }
+        });
+    </script>
+    {% endblock %}
   </head>
   
   <body>
@@ -16,31 +32,22 @@
         Hi, <a href="#">jenaiz</a> (<a href="#">Logout</a>)
       </div>
     </div>
-
     <div id="content">
       <div id="content_header">
         <form method="post" action="/search" class="well form-search">
-          <input type="text" class="input-medium search-query" size="50px" name="q" id="q">
+          <input type="text" class="input-medium search-query" name="q" id="q">
           <button type="submit" class="btn">Search</button>
         </form>
       </div>
       <div id="content_help">
-                Searches related to... <a href="">{{ query }}</a>
-
       </div>
-      <div id="content_links">
-        {% for link in links %}
-          <div id="link">
-            <h3><a href="{{ link.url }}" target="_blank">{{ link.title }}</a></h3>
-            <p>{{ link.text }}</p>
-            <a href="{{link}}">cached</a> - <a href="#">February 12th</a>
-          </div>        
-        {% endfor %}
-      </div>
-      <div id="content_home_right"><a href="#">Adsword: 360 x 250</a></div>
+      {% block content %}{% endblock %}
+      
     </div>
     <div id="footer">
+      {% block footer %}
       &copy; Copyright 2012 All rights reserved - Powered by <a href="appengine.com">Google App Engine</a>, designed by <a href="http://jenaiz.com">Jesús Navarrete</a>
+      {% endblock %}
     </div>
   </body>
 </html>
