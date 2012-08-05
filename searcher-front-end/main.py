@@ -52,8 +52,6 @@ class MainHandler(Handler):
   def get(self):
     template_values = { }
 
-    #path = os.path.join(os.path.dirname(__file__), 'index.html')
-    #self.response.out.write(template.render(path, template_values))
     self.render("home.html")
 
 
@@ -67,13 +65,7 @@ class SearchHandler(Handler):
     links.append(l1)
     links.append(l2)
     links.append(l3)
-    #template_values = {
-    #  'query': self.request.get('q'),
-    #  'links': links
-    #  }
-#
-    #path = os.path.join(os.path.dirname(__file__), 'results.html')
-    #self.response.out.write(template.render(path, template_values))
+
     self.render("list.html", query=self.request.get('q'), links=links)
 
 app = webapp2.WSGIApplication([('/', MainHandler), 
