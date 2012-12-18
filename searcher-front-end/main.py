@@ -19,11 +19,6 @@ import os
 import time
 import jinja2
 
-from google.appengine.ext.webapp import template
-from protorpc import messages
-from protorpc import message_types
-from protorpc import remote
-
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
 
@@ -50,11 +45,7 @@ class Link:
 
 class MainHandler(Handler):
   def get(self):
-    template_values = { }
-
     self.render("home.html")
-
-
     
 class SearchHandler(Handler):
   def post(self):
@@ -68,7 +59,59 @@ class SearchHandler(Handler):
 
     self.render("list.html", query=self.request.get('q'), links=links)
 
+class TwitterHandler(Handler):
+  def get(self):
+    self.render("twitter.html")
+
+    
+
+class SignupHandler(Handler):
+  def get(self):
+      self.render('signup.html', username='', email='', username_error='', password_error='', verify_error='', email_error='')
+  def post(self):
+      username = self.request.get('username')
+      email = self.request.get('email')
+      password = self.request.get('password')
+      verify = self.request.get('verify')
+
+      username_valid = valid_username(username)
+      password_valid = valid_password(password)
+      equal_passwords = (password == verify)
+      email_valid = valid_email(email)
+      if email == '':
+          email_valid = True
+
+      if (username_valid and password_valid and email_valid and equal_passwords and not user_exist(username)):
+          h = make_pw_hash(username, password).split('|')
+          
+          a = User(username = username, password = h[0], salt = h[1], email = email)
+          a.put()
+          
+          cookie = '%s|%s' % (a.key().id(), h[0])
+          
+          self.response.headers.add_header('Set-Cookie', 'user_id=%s' % str(cookie))
+          
+          self.redirect('/welcome')
+      else:
+          username_error = ''
+          password_error = ''
+          verify_error = ''
+          email_error = ''
+          if user_exist(username):
+              username_error = 'That user already exists.'
+          if not username_valid:
+              username_error = "That's not a valid username."
+          if not password_valid:
+              password_error = "That's wasn't a valid password."
+          if not equal_passwords:
+              verify_error = "Your password didn't match."
+          if email != '' and not email_valid:
+              email_error = "That's not a valid email."
+          self.render('signup.html', username=username, email=email, username_error=username_error, password_error=password_error, verify_error=verify_error, email_error=email_error)
+
 app = webapp2.WSGIApplication([('/', MainHandler), 
-                              ('/search', SearchHandler)],
+                              ('/search', SearchHandler),
+                              ('/twitter', TwitterHandler),
+                              ('/signup', SignupHandler)],
                               debug=True)
 

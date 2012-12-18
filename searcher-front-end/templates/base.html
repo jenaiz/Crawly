@@ -29,7 +29,10 @@
         <a href="#TODO">About us</a> 
       </div>
       <div id="header_login">
+        <a href="/login">Login</a> or <a href="/signup">Sign Up</a>
+        {% if false %}
         Hi, <a href="#">jenaiz</a> (<a href="#">Logout</a>)
+        {% endif %}
       </div>
     </div>
     <div id="content">
@@ -38,8 +41,6 @@
           <input type="text" class="input-medium search-query" name="q" id="q">
           <button type="submit" class="btn">Search</button>
         </form>
-      </div>
-      <div id="content_help">
       </div>
       {% block content %}{% endblock %}
       
