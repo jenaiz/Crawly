@@ -1,17 +1,28 @@
 application: looktwits-root
 version: 1
-runtime: python
+runtime: python27
 api_version: 1
 threadsafe: yes
 
 handlers:
 - url: /favicon\.ico
-  static_files: favicon.ico
+  static_files: static/favicon.ico
   upload: favicon\.ico
 
-- url: .*
-  script: root.py
+- url: /css
+  static_dir: static/css
 
-#libraries:
-#- name: webapp2
-#  version: "2.5.1"
+- url: /js
+  static_dir: static/js
+
+- url: /*
+  script: main.app
+
+- url: .*
+  script: root.app
+
+libraries:
+- name: webapp2
+  version: "2.5.1"
+- name: jinja2                                                                  
+  version: latest
