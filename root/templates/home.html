@@ -4,28 +4,18 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
-  <div id="content_help"></div>
-  <div id="content_home_left">
-    <div id="latest_header">Latest</div>
-    <ul>
-      {% for i in range(6) %}
-      <li>
-        <p class="latest_title">{{ i }} title of a search in Crawly</p>
-        <p class="latest_footer">45 minutes ago</p>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-  <div id="content_home_center">
-    <div id="latest_header">Latest news in your social network</div>
-    <ul>
-      {% for i in range(3) %}	
-      <li>
-        <p class="latest_title">title of a search in Crawly</p>
-        <p class="latest_footer">Search for the latest jobs in the Navy, Army and Air Force and discover all the benefits of being part of the Australian Defence Force. Search for the latest jobs in the Navy, Army and Air Force and discover all the benefits of being part of the Australian Defence Force.</p>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-  <div id="content_home_right"><a href="#">Adsword: 360 x 250</a></div>
+    {% for worker in workers %}
+      <tr>
+        <td> <span class="badge badge-warning"></span></td>
+        <td>py</td>
+        <td>{{worker.url}}</td>
+        <td>1234</td>
+        <td><span class="badge badge-important">65</span></td>
+        <td>11:25</td>
+        <td><span class="badge badge-warning">01</span></td>
+        <td>11:31</td>
+        <td>98.123%</td>
+        <td><i class="icon-refresh"></i> <i class="icon-remove"></i> </td>
+      </tr>       
+    {% endfor %}
 {% endblock %}

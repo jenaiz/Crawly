@@ -1,5 +1,6 @@
 import cgi
-
+import webapp2
+    
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 
@@ -88,9 +89,9 @@ class QueueHandler(webapp.RequestHandler):
 service_mappings = service_handlers.service_mapping(
         [('/root', RootService)         
         ])
-service_mappings.append(('/queue', QueueHandler))
+#service_mappings.append(('/queue', QueueHandler))
 
-app = webapp.WSGIApplication(service_mappings)
+app = webapp2.WSGIApplication(service_mappings)
 
 def main():
     util.run_wsgi_app(application)

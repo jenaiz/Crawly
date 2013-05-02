@@ -14,10 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
 import webapp2
 import os
 import time
 import jinja2
+
+from lib import Worker
+
+from google.appengine.ext import db
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
@@ -45,7 +50,12 @@ class Link:
 
 class NodesHandler(Handler):
   def get(self):
-    self.render("home.html")
+    #self.render("home.html")
+    q = db.GqlQuery('SELECT * FROM Worker')
+    workers = q.fetch(1)
+    
+    self.render("home.html", workers=workers)
+
 
 class MainHandler(Handler):
   def get(self):
