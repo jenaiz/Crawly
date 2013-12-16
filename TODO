@@ -1,0 +1,22 @@
+TODO:
+=====
+
+X - recibir urls
+X - grabar urls recibidas
+X - lanzar tareas para cada una de las urls recibidas
+- crawler la url
+- al finalizar guardar resultado
+- envio de resultado ¿cuando?? -> cuando termine el crawler, lanzo tarea para ver si no quedan urls para crawlear y sino quedan, envio resultados
+- borrado de los resultados
+
+XX-- Root - Searcher:
+- dar de alta workers
+- crear base de datos con los workers
+- listado de urls de workers
+- envio de url para escanear a un worker
+- recepción de resultados de worker
+
+Searcher:
+=========
+- pagina de búsqueda
+- listado de resultados

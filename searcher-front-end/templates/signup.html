@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+  <div id="content_help"><h2>Signup</h2></div>
+  <div id="signup">
+    <a href="/twitter">Sign in with twitter</a>
+    <form method="post">
+      <table>
+        <colgroup>
+          <col width="23%">
+          <col width="48%">
+          <col width="29%">
+        </colgroup>
+        <tbody>
+          <tr>
+            <td class="label"><label for="author">Email</label></td>
+            <td>
+              <p class="">
+                <input type="text" name="email" value="{{email}}" tabindex="4" class="input">
+              </p>
+              <p class="alert">{{email_error}}</p>
+            </td>
+            <td><span>Your email address</span></td>
+          </tr>
+          <tr>
+            <td class="label"><label for="author">Username</label></td>
+            <td>
+              <p class="">
+                <input type="text" name="username" value="{{username}}" tabindex="1" class="input">
+              </p>
+            </td>
+            <p class="alert">{{username_error}}</p>
+            <td><span>Your nick is required</span></td>
+          </tr>
+          <tr>
+            <td class="label"><label for="author">Password</label></td>
+            <td>
+              <p class="">
+                <input type="password" name="password" value="" tabindex="2" class="input">
+              </p>
+              <p class="alert">{{password_error}}</p>
+            </td>
+            <td><span>Your Password is required</span></td>
+          </tr>        
+        </tbody>
+      </table>
+      <input type="submit" tabindex="5">
+    </form>
+  </div>
+{% endblock %}
